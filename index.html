@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterviewIQ — AI Interview Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       SIDEBAR NAV (Website 1)
+  ══════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">InterviewIQ</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-page="home" onclick="showPage('home')">
+        <i class="fa-solid fa-house"></i><span>Home</span>
+      </button>
+      <button class="nav-btn" data-page="interview" onclick="showPage('interview')">
+        <i class="fa-solid fa-microphone"></i><span>Practice</span>
+      </button>
+      <button class="nav-btn" data-page="dashboard" onclick="showPage('dashboard')">
+        <i class="fa-solid fa-chart-line"></i><span>Dashboard</span>
+      </button>
+      <button class="nav-btn" data-page="history" onclick="showPage('history')">
+        <i class="fa-solid fa-clock-rotate-left"></i><span>History</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <span class="user-avatar">👤</span>
+        <span class="user-name" id="sidebarUserName">User</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════
+       MAIN CONTENT (Website 1 pages)
+  ══════════════════════════════════ -->
+  <main class="main-content" id="mainContent">
+
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- ══════════ PAGE: HOME ══════════ -->
+    <section class="page active" id="page-home">
+      <div class="hero-section">
+        <div class="hero-blobs">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <div class="blob blob-3"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-badge">🚀 AI-Powered Interview Coach</div>
+          <h1 class="hero-title">Ace Every <span class="gradient-text">Interview</span><br/>With Confidence</h1>
+          <p class="hero-sub">Practice with real questions, get instant AI feedback, track your growth, and walk into every interview ready to impress.</p>
+          <div class="hero-cta">
+            <button class="btn-primary" onclick="showPage('interview')">Start Practicing <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="btn-ghost" onclick="showPage('dashboard')">View Dashboard</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-pill"><span class="stat-num" id="totalSessions">0</span><span class="stat-label">Sessions</span></div>
+            <div class="stat-pill"><span class="stat-num" id="avgScoreHome">—</span><span class="stat-label">Avg Score</span></div>
+            <div class="stat-pill"><span class="stat-num" id="bestScore">—</span><span class="stat-label">Best Score</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="mockup-card">
+            <div class="mockup-header">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="mockup-title">Live Feedback</span>
+            </div>
+            <div class="mockup-score-ring">
+              <svg viewBox="0 0 120 120" class="ring-svg">
+                <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                <circle cx="60" cy="60" r="50" class="ring-fill" id="heroRing" style="stroke-dashoffset:220"/>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-val" id="heroRingVal">82</span>
+                <span class="ring-label">Score</span>
+              </div>
+            </div>
+            <div class="mockup-bars">
+              <div class="mbar"><span>Relevance</span><div class="mbar-track"><div class="mbar-fill" style="width:90%;background:#ff6b6b"></div></div><span>27</span></div>
+              <div class="mbar"><span>Clarity</span><div class="mbar-track"><div class="mbar-fill" style="width:80%;background:#ffd93d"></div></div><span>12</span></div>
+              <div class="mbar"><span>Technical</span><div class="mbar-track"><div class="mbar-fill" style="width:85%;background:#6bcb77"></div></div><span>25</span></div>
+              <div class="mbar"><span>Grammar</span><div class="mbar-track"><div class="mbar-fill" style="width:80%;background:#4d96ff"></div></div><span>12</span></div>
+              <div class="mbar"><span>Confidence</span><div class="mbar-track"><div class="mbar-fill" style="width:60%;background:#c77dff"></div></div><span>6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-strip">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#ff6b6b22;color:#ff6b6b">🎯</div>
+          <h3>Smart Scoring</h3>
+          <p>5-axis scoring: Relevance, Clarity, Technical Accuracy, Grammar & Confidence</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#ffd93d22;color:#ffd93d">📈</div>
+          <h3>Progress Tracking</h3>
+          <p>Watch your scores climb with visual progress charts over sessions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#6bcb7722;color:#6bcb77">🤖</div>
+          <h3>AI Feedback</h3>
+          <p>Get detailed, actionable feedback powered by Claude AI after every answer</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#4d96ff22;color:#4d96ff">🗂️</div>
+          <h3>Question Bank</h3>
+          <p>HR, Technical & Behavioral questions across multiple domains</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ PAGE: INTERVIEW (Setup) ══════════ -->
+    <section class="page" id="page-interview">
+      <div id="setup-screen">
+        <div class="page-header">
+          <h2 class="page-title">Setup Your <span class="gradient-text">Session</span></h2>
+          <p class="page-sub">Tailor the interview to match your target role</p>
+        </div>
+        <div class="setup-grid">
+          <div class="setup-card">
+            <label class="setup-label"><i class="fa-solid fa-user-tie"></i> Your Name</label>
+            <input type="text" id="userName" class="setup-input" placeholder="Enter your name…" />
+          </div>
+          <div class="setup-card">
+            <label class="setup-label"><i class="fa-solid fa-briefcase"></i> Job Role</label>
+            <select id="jobRole" class="setup-input">
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Data Scientist">Data Scientist</option>
+              <option value="Product Manager">Product Manager</option>
+              <option value="UI/UX Designer">UI/UX Designer</option>
+              <option value="Marketing Manager">Marketing Manager</option>
+              <option value="Business Analyst">Business Analyst</option>
+              <option value="DevOps Engineer">DevOps Engineer</option>
+              <option value="Full Stack Developer">Full Stack Developer</option>
+            </select>
+          </div>
+          <div class="setup-card">
+            <label class="setup-label"><i class="fa-solid fa-layer-group"></i> Interview Type</label>
+            <select id="interviewType" class="setup-input">
+              <option value="HR">HR Round</option>
+              <option value="Technical">Technical Round</option>
+              <option value="Behavioral">Behavioral Round</option>
+              <option value="Mixed">Mixed (All Types)</option>
+            </select>
+          </div>
+          <div class="setup-card">
+            <label class="setup-label"><i class="fa-solid fa-signal"></i> Difficulty</label>
+            <div class="difficulty-pills">
+              <button class="diff-pill active" data-diff="Easy" onclick="setDiff(this,'Easy')">Easy</button>
+              <button class="diff-pill" data-diff="Medium" onclick="setDiff(this,'Medium')">Medium</button>
+              <button class="diff-pill" data-diff="Hard" onclick="setDiff(this,'Hard')">Hard</button>
+            </div>
+          </div>
+          <div class="setup-card full-width">
+            <label class="setup-label"><i class="fa-solid fa-list-ol"></i> Number of Questions</label>
+            <div class="qcount-row">
+              <input type="range" id="qCount" min="3" max="10" value="5" class="range-slider" oninput="document.getElementById('qCountVal').textContent=this.value"/>
+              <span class="qcount-val" id="qCountVal">5</span>
+            </div>
+          </div>
+        </div>
+        <div class="setup-mode-toggle">
+          <p class="setup-label" style="margin-bottom:12px"><i class="fa-solid fa-video"></i> Interview Mode</p>
+          <div class="mode-cards">
+            <div class="mode-card active" id="modeText" onclick="selectMode('text')">
+              <div class="mode-icon">⌨️</div>
+              <div class="mode-title">Text Mode</div>
+              <div class="mode-desc">Type answers, get AI scoring</div>
+            </div>
+            <div class="mode-card" id="modeVideo" onclick="selectMode('video')">
+              <div class="mode-icon">📷</div>
+              <div class="mode-title">Live Video Mode</div>
+              <div class="mode-desc">Camera + mic analysis, filler detection</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary btn-start" onclick="startInterview()">
+          <i class="fa-solid fa-play"></i> Begin Interview
+        </button>
+      </div>
+
+      <!-- Text interview screen (Website 1) -->
+      <div id="interview-screen" style="display:none">
+        <div class="interview-topbar">
+          <div class="q-counter"><span id="qNum">1</span> / <span id="qTotal">5</span></div>
+          <div class="session-badge" id="sessionRoleBadge">Software Engineer</div>
+          <button class="btn-end" onclick="confirmEnd()"><i class="fa-solid fa-stop"></i> End Session</button>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="question-card">
+          <div class="q-type-tag" id="qTypeTag">Technical</div>
+          <p class="question-text" id="questionText">Loading question…</p>
+        </div>
+        <div class="answer-section">
+          <div class="answer-header">
+            <span>Your Answer</span>
+            <div class="answer-tools">
+              <button class="tool-btn" id="micBtn" onclick="toggleMic()" title="Voice Input"><i class="fa-solid fa-microphone"></i></button>
+              <span class="word-count" id="wordCount">0 words</span>
+            </div>
+          </div>
+          <textarea id="answerBox" class="answer-box" placeholder="Type your answer here… or use the mic button for voice input." oninput="updateWordCount()"></textarea>
+          <div class="answer-footer">
+            <button class="btn-hint" onclick="getHint()"><i class="fa-solid fa-lightbulb"></i> Get Hint</button>
+            <button class="btn-submit" onclick="submitAnswer()"><i class="fa-solid fa-paper-plane"></i> Submit Answer</button>
+          </div>
+        </div>
+        <div class="hint-box" id="hintBox" style="display:none">
+          <div class="hint-header"><i class="fa-solid fa-lightbulb"></i> Hint</div>
+          <p id="hintText"></p>
+        </div>
+        <div class="feedback-card" id="feedbackCard" style="display:none">
+          <div class="feedback-header">
+            <h3>AI Feedback <span class="ai-badge">Powered by Claude</span></h3>
+            <div class="total-score-badge" id="totalScoreBadge">—</div>
+          </div>
+          <div class="score-grid" id="scoreGrid"></div>
+          <div class="feedback-text-section">
+            <h4><i class="fa-solid fa-comment-dots"></i> Detailed Feedback</h4>
+            <div class="feedback-text" id="feedbackText">Analyzing…</div>
+          </div>
+          <div class="feedback-actions">
+            <button class="btn-next" onclick="nextQuestion()" id="nextBtn">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results screen (Website 1) -->
+      <div id="results-screen" style="display:none">
+        <div class="results-header">
+          <div class="confetti-emoji">🎉</div>
+          <h2>Session Complete!</h2>
+          <p id="resultsSubtitle">Here's how you performed</p>
+        </div>
+        <div class="results-summary">
+          <div class="summary-ring-wrap">
+            <svg viewBox="0 0 160 160" class="summary-ring-svg">
+              <circle cx="80" cy="80" r="68" class="ring-bg"/>
+              <circle cx="80" cy="80" r="68" class="ring-fill-summary" id="summaryRingFill"/>
+            </svg>
+            <div class="summary-ring-center">
+              <span class="summary-score" id="summaryScore">—</span>
+              <span class="summary-label">/ 100</span>
+            </div>
+          </div>
+          <div class="summary-breakdown" id="summaryBreakdown"></div>
+        </div>
+        <div class="results-tips" id="resultsTips"></div>
+        <div class="results-actions">
+          <button class="btn-primary" onclick="showPage('interview')">Practice Again <i class="fa-solid fa-rotate-right"></i></button>
+          <button class="btn-ghost" onclick="showPage('dashboard')">View Dashboard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ PAGE: DASHBOARD ══════════ -->
+    <section class="page" id="page-dashboard">
+      <div class="page-header">
+        <h2 class="page-title">Progress <span class="gradient-text">Dashboard</span></h2>
+        <p class="page-sub">Track your improvement over every session</p>
+      </div>
+      <div class="dash-kpi-row">
+        <div class="kpi-card" style="--accent:#ff6b6b">
+          <div class="kpi-icon">🏆</div>
+          <div class="kpi-val" id="kpiTotal">0</div>
+          <div class="kpi-label">Total Sessions</div>
+        </div>
+        <div class="kpi-card" style="--accent:#ffd93d">
+          <div class="kpi-icon">📊</div>
+          <div class="kpi-val" id="kpiAvg">—</div>
+          <div class="kpi-label">Average Score</div>
+        </div>
+        <div class="kpi-card" style="--accent:#6bcb77">
+          <div class="kpi-icon">🌟</div>
+          <div class="kpi-val" id="kpiBest">—</div>
+          <div class="kpi-label">Best Score</div>
+        </div>
+        <div class="kpi-card" style="--accent:#4d96ff">
+          <div class="kpi-icon">📈</div>
+          <div class="kpi-val" id="kpiTrend">—</div>
+          <div class="kpi-label">Last vs Avg</div>
+        </div>
+      </div>
+      <div class="dash-charts-row">
+        <div class="chart-card wide">
+          <div class="chart-title">Score Over Sessions</div>
+          <canvas id="progressChart" height="180"></canvas>
+          <div class="no-data-msg" id="noDataMsg">Complete at least one session to see your progress chart!</div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Skill Breakdown (Latest)</div>
+          <canvas id="radarChart" height="220"></canvas>
+          <div class="no-data-msg" id="noRadarMsg">No data yet.</div>
+        </div>
+      </div>
+      <div class="dash-bottom-row">
+        <div class="streak-card">
+          <h4><i class="fa-solid fa-fire"></i> Improvement Streaks</h4>
+          <div class="streak-list" id="streakList"><p class="muted">No sessions yet.</p></div>
+        </div>
+        <div class="badges-card">
+          <h4><i class="fa-solid fa-medal"></i> Achievements</h4>
+          <div class="badges-grid" id="badgesGrid">
+            <div class="badge-item locked"><span>🥇</span><small>Score 90+</small></div>
+            <div class="badge-item locked"><span>🔥</span><small>3 Sessions</small></div>
+            <div class="badge-item locked"><span>💯</span><small>Perfect Answer</small></div>
+            <div class="badge-item locked"><span>📚</span><small>10 Sessions</small></div>
+            <div class="badge-item locked"><span>🚀</span><small>Improve 20pts</small></div>
+            <div class="badge-item locked"><span>🎯</span><small>Avg 80+</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ PAGE: HISTORY ══════════ -->
+    <section class="page" id="page-history">
+      <div class="page-header">
+        <h2 class="page-title">Session <span class="gradient-text">History</span></h2>
+        <p class="page-sub">Every practice session you've completed</p>
+      </div>
+      <div class="history-controls">
+        <button class="btn-danger" onclick="clearHistory()"><i class="fa-solid fa-trash"></i> Clear All</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="empty-history">
+          <div class="empty-icon">📋</div>
+          <p>No sessions yet. <button class="link-btn" onclick="showPage('interview')">Start your first practice!</button></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════
+       WEBSITE 2: LIVE VIDEO INTERVIEW OVERLAY
+  ══════════════════════════════════ -->
+  <div id="liveInterviewOverlay" style="display:none">
+
+    <!-- Onboarding -->
+    <div id="onboarding">
+      <div class="onboard-card fade-in" id="onboard-step-1">
+        <button class="onboard-back-btn" onclick="exitLiveInterview()">← Back to Setup</button>
+        <div class="onboard-icon">🎯</div>
+        <div class="onboard-title">Live Interview Mode</div>
+        <div class="onboard-sub">AI-powered mock interview with real-time micro-expression analysis, filler word detection, and timestamped feedback.</div>
+        <div class="onboard-perms">
+          <div class="perm-row">
+            <span class="perm-icon">📷</span>
+            Webcam access
+            <span class="perm-status ps-pending" id="ps-cam">PENDING</span>
+          </div>
+          <div class="perm-row">
+            <span class="perm-icon">🎤</span>
+            Microphone access
+            <span class="perm-status ps-pending" id="ps-mic">PENDING</span>
+          </div>
+        </div>
+        <button class="btn2 btn2-primary" id="requestPerms" style="width:100%;justify-content:center;font-size:15px;padding:14px">
+          Grant Permissions &amp; Continue →
+        </button>
+      </div>
+
+      <div class="onboard-card fade-in" id="onboard-step-2" style="display:none">
+        <button class="onboard-back-btn" onclick="exitLiveInterview()">← Back to Setup</button>
+        <div class="onboard-icon">💼</div>
+        <div class="onboard-title">Choose Questions</div>
+        <div class="onboard-sub">Select your starting question</div>
+        <div class="q-select-grid" id="qSelectGrid"></div>
+        <button class="btn2 btn2-primary" id="startLiveInterview" style="width:100%;justify-content:center;font-size:15px;padding:14px">
+          Start Interview →
+        </button>
+      </div>
+    </div>
+
+    <!-- Report Overlay -->
+    <div id="report">
+      <div class="report-inner">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <div class="report-title">Interview Report</div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn2 btn2-ghost" id="closeReport">✕ Close</button>
+            <button class="btn2 btn2-ghost" onclick="exitLiveInterview()">← Main Menu</button>
+          </div>
+        </div>
+        <div class="report-sub" id="report-sub"></div>
+        <div class="report-grid" id="report-metrics"></div>
+        <div class="report-section">
+          <h3>📋 Timestamped Feedback</h3>
+          <div class="report-tl" id="report-timeline"></div>
+        </div>
+        <div class="report-section">
+          <h3>💡 Actionable Advice</h3>
+          <div class="advice-list" id="report-advice"></div>
+        </div>
+        <div class="report-section">
+          <h3>📝 Full Transcript</h3>
+          <div class="transcript-box" id="report-transcript" style="max-height:300px"></div>
+        </div>
+        <div style="text-align:center;margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn2 btn2-primary" id="restartBtn" style="padding:14px 32px;font-size:15px">🔄 New Interview</button>
+          <button class="btn2 btn2-ghost" onclick="exitLiveInterview()" style="padding:14px 32px;font-size:15px">🏠 Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live App Header -->
+    <header id="liveHeader">
+      <div class="logo2">
+        <span class="logo-dot2"></span>InterviewIQ <span style="opacity:0.5;font-size:13px;margin-left:4px">LIVE</span>
+      </div>
+      <div class="header-status">
+        <div class="status-pill"><span class="ind ind-green" id="camInd"></span>Camera</div>
+        <div class="status-pill"><span class="ind" id="micInd" style="background:var(--text3-v2)"></span>Mic</div>
+        <div class="status-pill" id="aiStatus"><span class="ind ind-yellow"></span>AI Ready</div>
+        <button class="btn2 btn2-ghost btn2-sm" onclick="exitLiveInterview()" style="font-size:12px;padding:5px 12px;">← Exit</button>
+      </div>
+    </header>
+
+    <!-- Main App Grid -->
+    <div class="app2" id="mainApp">
+      <!-- Question banner -->
+      <div class="question-banner2">
+        <span class="q-badge2" id="qBadge">Q 1 / 5</span>
+        <div class="q-text2" id="qText">Loading question…</div>
+        <div class="q-timer2" id="qTimer">02:00</div>
+        <div class="q-nav" id="qNav"></div>
+      </div>
+
+      <!-- LEFT: Video Panel -->
+      <div class="video-panel">
+        <div class="video-wrapper">
+          <div class="video-placeholder" id="videoPlaceholder">
+            <span class="cam-icon">📷</span>
+            <span style="font-size:13px">Camera initializing…</span>
+          </div>
+          <video id="webcam" autoplay muted playsinline></video>
+          <canvas id="faceCanvas"></canvas>
+          <div class="video-overlays">
+            <div class="eye-contact-bar">
+              <span class="eye-label">EYE CONTACT</span>
+              <div class="eye-track">
+                <div class="eye-fill" id="eyeFill" style="width:0%"></div>
+              </div>
+              <span class="eye-pct" id="eyePct" style="color:var(--green2)">—</span>
+            </div>
+            <div class="rec-badge" id="recBadge">
+              <span class="rec-dot"></span>REC
+            </div>
+          </div>
+        </div>
+        <div class="audio-vis" id="audioVis"></div>
+        <div class="controls2">
+          <button class="btn2 btn2-primary" id="btnRecord" disabled>▶ Start Answer</button>
+          <button class="btn2 btn2-danger"  id="btnStop"   disabled>⏹ Stop</button>
+          <button class="btn2 btn2-ghost"   id="btnSkip">Skip →</button>
+          <button class="btn2 btn2-success btn2-sm" id="btnReport" style="margin-left:auto">📊 View Report</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Analytics Panel -->
+      <div class="analytics-panel">
+        <div class="panel-tabs">
+          <button class="tab active" data-tab="live">LIVE</button>
+          <button class="tab" data-tab="filler">FILLER</button>
+          <button class="tab" data-tab="transcript">TRANSCRIPT</button>
+          <button class="tab" data-tab="score">SCORE</button>
+        </div>
+
+        <!-- LIVE TAB -->
+        <div class="panel-content pane active" id="pane-live">
+          <div class="sec-label">Real-time metrics</div>
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Eye Contact</span>
+              <span style="font-size:11px;font-family:var(--mono2);color:var(--text3-v2)" id="eyeStatus">—</span>
+            </div>
+            <div class="ring-wrap">
+              <svg class="ring" width="64" height="64" viewBox="0 0 64 64">
+                <circle class="ring-track" cx="32" cy="32" r="27"/>
+                <circle class="ring-fill-v2" id="eyeRing" cx="32" cy="32" r="27"
+                  stroke="var(--green2)" stroke-dasharray="169.6" stroke-dashoffset="169.6"/>
+              </svg>
+              <div>
+                <div class="metric-value good2" id="eyeMetric">0%</div>
+                <div class="metric-sub2">of session time</div>
+              </div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header"><span class="metric-label">Speaking Pace</span></div>
+            <div class="metric-value warn2" id="paceMetric">—</div>
+            <div class="metric-sub2" id="paceSub">WPM (target: 120–160)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header"><span class="metric-label">Filler Words</span></div>
+            <div class="metric-value bad2" id="fillerMetric">0</div>
+            <div class="metric-sub2">total this session</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header"><span class="metric-label">Confidence Score</span></div>
+            <div class="metric-value good2" id="confMetric">—</div>
+            <div class="metric-sub2">based on pace + eye contact</div>
+          </div>
+          <div class="sec-label" style="margin-top:4px">Live feedback</div>
+          <div class="timeline" id="liveTl"></div>
+        </div>
+
+        <!-- FILLER TAB -->
+        <div class="panel-content pane" id="pane-filler">
+          <div class="sec-label">Detected filler words</div>
+          <div class="filler-grid" id="fillerGrid"></div>
+          <div class="sec-label" style="margin-top:8px">Occurrence timeline</div>
+          <div id="fillerTlWrap" style="display:flex;flex-direction:column;gap:6px"></div>
+        </div>
+
+        <!-- TRANSCRIPT TAB -->
+        <div class="panel-content pane" id="pane-transcript">
+          <div class="sec-label">Live transcript (filler words highlighted)</div>
+          <div class="transcript-box" id="liveTranscript">
+            <span class="transcript-placeholder">Start your answer to see transcript…</span>
+          </div>
+        </div>
+
+        <!-- SCORE TAB -->
+        <div class="panel-content pane" id="pane-score">
+          <div class="sec-label">Overall performance</div>
+          <div class="metric-card">
+            <div class="score-section">
+              <svg class="ring" width="100" height="100" viewBox="0 0 100 100">
+                <circle class="ring-track" cx="50" cy="50" r="42" stroke-width="7"/>
+                <circle class="ring-fill-v2" id="scoreRing" cx="50" cy="50" r="42"
+                  stroke="var(--accent-v2)" stroke-width="7"
+                  stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+              </svg>
+              <div class="score-num" id="scoreNum">—</div>
+              <div class="score-label" id="scoreGrade">Complete an answer to see score</div>
+            </div>
+            <div class="score-breakdown" id="scoreBreakdown"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SHARED: LOADING OVERLAY
+  ══════════════════════════════════ -->
+  <div class="loading-overlay" id="loadingOverlay" style="display:none">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p id="loadingMsg">AI is analyzing your answer…</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
